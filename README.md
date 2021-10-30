@@ -43,7 +43,7 @@ The data in the database will disappear after API shutdown. In case if we need k
 
 ER-diagram:
 
-
+![ERD](doc/ER_diagram.png)
   
 
 #### API Endpoints Design
@@ -60,6 +60,9 @@ ER-diagram:
 - Delete: /api/campsite/{orderId}      -- Delete reservation
 
 For the detail, please refer to the openapi spec [here](src/main/resources/openapi.yaml)
+
+
+For detail work sequence, please refer [here](doc/workflow.md) 
 
 ### Local build
 
@@ -100,5 +103,8 @@ For detail test cases, please refer the [test cases](doc/test_cases.md) document
 ### Performance 
 
 
-//TODO
+We can use jmeter to verify the API performance. 
 
+From jmeter, open the jmeter file: ./jmeter/campsite-get.jmx. The test plan set 10 concurrent threads to access the GET campsite endpoint (http://localhost:8080/api/campsite?startDate=2021-11-10&endDate=2021-11-18)
+
+For detail of performance result, please refer [performance](doc/performance.md) document
