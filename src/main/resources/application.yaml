@@ -16,6 +16,24 @@ spring:
 server:
   port: 8080
 
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+
+
+
 query:
   getReservedDates: SELECT reserved_date FROM reserved;
   insertReservedDates: INSERT INTO reserved(reserved_date ) VALUES(?);

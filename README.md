@@ -103,5 +103,8 @@ For detail test cases, please refer the [test cases](doc/test_cases.md) document
 ### Performance 
 
 
-//TODO
+We can use jmeter to verify the API performance. 
 
+From jmeter, open the jmeter file: ./jmeter/campsite-get.jmx. The test plan set 10 concurrent threads to access the GET campsite endpoint (http://localhost:8080/api/campsite?startDate=2021-11-10&endDate=2021-11-18)
+
+For detail of performance result, please refer [performance](doc/performance.md) document
