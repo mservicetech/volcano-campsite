@@ -1,5 +1,6 @@
 # volcano-campsite
 
+volcano-campsite API is the microservice restful API for volcano campsite reservation.
 
 ### Requirement
 
@@ -13,8 +14,39 @@ Please [click link](doc/requirement.md) for detail of business requirement
 
 - SpringBoot
 
+### API design:
 
-### Endpoints
+#### Backend repository Design
+
+The volcano-campsite API use H2 database as backend repository to save user and reservation information. Since we only design the API to handler one single campsite, the database structure is simple:
+
+
+| table   | comments        |
+| --------|---------------|
+| client  | client information, include client name and client email |
+| reservation  | reservation detail information. This is the table hold book of records for reservation |
+| reserved  | reserved date; This table used to  handle concurrent requests  |
+  
+
+By default, when the API start, h2 will start in-memory database testdb and create tables above
+
+```yaml
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+```
+The data in the database will disappear after API shutdown. In case if we need keep the data, change the url to use file base h2 database:
+
+    url: jdbc:h2:~/testdb
+
+ER-diagram:
+
+
+  
+
+#### API Endpoints Design
 
 - Get: /api/campsite           -- List available time for the campsite
 
@@ -44,7 +76,12 @@ java -jar target/volcano-0.0.1-SNAPSHOT.jar
 ```
 
 - Start from local docker environment
-//TODO
+
+From the API root folder, run docker command:
+```yaml
+docker build -t volcano/campsite .
+docker run -p 8080:8080 volcano/campsite
+```
   
 
 ### API  verification
@@ -59,3 +96,9 @@ We can use postman to send https request to test the API:
 
 
 For detail test cases, please refer the [test cases](doc/test_cases.md) document
+
+### Performance 
+
+
+//TODO
+
