@@ -54,7 +54,7 @@ public interface CampsiteApi {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"arrival\" : \"2021-01-30T00:00:00.000+0000\", \"client\" : { \"name\" : \"name\", \"email\" : \"email\" }, \"departure\" : \"2021-01-30T00:00:00.000+0000\" }";
-                    com.mservicetech.campsite.controller.ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
             }
@@ -88,7 +88,7 @@ public interface CampsiteApi {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"arrival\" : \"2021-01-30T00:00:00.000+0000\", \"client\" : { \"name\" : \"name\", \"email\" : \"email\" }, \"departure\" : \"2021-01-30T00:00:00.000+0000\" }";
-                    com.mservicetech.campsite.controller.ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
             }
@@ -122,7 +122,7 @@ public interface CampsiteApi {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"endDate\" : \"2000-01-23\", \"datelist\" : [ \"2000-01-23\", \"2000-01-23\" ], \"comment\" : \"comment\", \"startDate\" : \"2000-01-23\" }";
-                    com.mservicetech.campsite.controller.ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
             }
