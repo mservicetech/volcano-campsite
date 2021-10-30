@@ -43,7 +43,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
     post:
       summary: Create resevation for campsite
       operationId: createOrder
@@ -72,7 +74,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
   /campsite/{orderId}:
     put:
       summary: update campsite order
@@ -114,7 +118,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
     delete:
       summary: delete a campsite oder
       operationId: deleteOrder
@@ -143,7 +149,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
 components:
   securitySchemes:
     campsite_auth:
@@ -169,8 +177,12 @@ components:
           type: string
         email:
           type: string
+          format: email
     Reservation:
       type: object
+      required:
+        - departure
+        - arrival
       properties:
         id:
           type: string
@@ -209,7 +221,6 @@ components:
         - message
       properties:
         code:
-          type: integer
-          format: int32
+          type: string
         message:
           type: string

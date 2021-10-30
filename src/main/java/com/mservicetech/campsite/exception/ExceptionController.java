@@ -9,18 +9,27 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionController {
 
+    public  final String SYSTEM_ERROR_CODE = "ERR10000";
+    public  final String DATA_PROCESS_ERROR_CODE = "ERR10001";
+    public  final String DATA_NOT_FOUND_ERROR_CODE = "ERR10002";
+
     @ExceptionHandler(value = ServiceProcessException.class)
     public ResponseEntity<Object> exception(ServiceProcessException exception) {
-        return new ResponseEntity<>("Backend service error. Please contact to admin; Error message:" + exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new Error().code(SYSTEM_ERROR_CODE).message(exception.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = DataProcessException.class)
     public ResponseEntity<Object> exception(DataProcessException exception) {
-        return new ResponseEntity<>(new Error().code(HttpStatus.INTERNAL_SERVER_ERROR.value()).message(exception.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new Error().code(DATA_PROCESS_ERROR_CODE).message(exception.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = DataNotFoundException.class)
     public ResponseEntity<Object> exception(DataNotFoundException exception) {
-        return new ResponseEntity<>(new Error().code(HttpStatus.BAD_REQUEST.value()).message(exception.getMessage()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new Error().code(DATA_NOT_FOUND_ERROR_CODE).message(exception.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = BusinessValidationException.class)
+    public ResponseEntity<Object> exception(BusinessValidationException exception) {
+        return new ResponseEntity<>(exception.getErrors(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }

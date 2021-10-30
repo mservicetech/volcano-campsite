@@ -1,26 +1,29 @@
 package com.mservicetech.campsite.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
-
-import javax.validation.constraints.*;
-import java.io.Serializable;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.io.Serializable;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 
 /**
  * Error
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-10-28T21:30:05.649560600-04:00[America/New_York]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-10-30T14:02:37.322426800-04:00[America/New_York]")
 public class Error  implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @JsonProperty("code")
-  private Integer code;
+  private String code;
 
   @JsonProperty("message")
   private String message;
 
-  public Error code(Integer code) {
+  public Error code(String code) {
     this.code = code;
     return this;
   }
@@ -33,11 +36,11 @@ public class Error  implements Serializable {
   @NotNull
 
 
-  public Integer getCode() {
+  public String getCode() {
     return code;
   }
 
-  public void setCode(Integer code) {
+  public void setCode(String code) {
     this.code = code;
   }
 

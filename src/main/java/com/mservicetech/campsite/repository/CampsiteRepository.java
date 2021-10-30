@@ -16,6 +16,8 @@ public interface CampsiteRepository {
 
     int deleteDates(List<LocalDate> dateList);
 
+    List<LocalDate> verifyDates(List<LocalDate> dateList);
+
     List<Client> checkClientExisting(Client client);
 
     long insertClient(Client client);

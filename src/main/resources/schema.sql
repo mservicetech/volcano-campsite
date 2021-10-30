@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS reservation
    arrival_date DATE not null,
    departure_date DATE not null,
    status varchar(20) default 'Active',
-   primary key(id)
+   primary key(id),
+   CONSTRAINT FK_client_reservation FOREIGN KEY (client_Id) REFERENCES client(id)
 );
 
 CREATE TABLE IF NOT EXISTS reserved
@@ -23,6 +24,3 @@ CREATE TABLE IF NOT EXISTS reserved
    reserved_date DATE not null,
    primary key(reserved_date)
 );
-
-INSERT INTO reserved(reserved_date ) VALUES('2021-11-05');
-INSERT INTO client(full_name, email ) VALUES('Admin', 'volcano.admin@gmail.com');
