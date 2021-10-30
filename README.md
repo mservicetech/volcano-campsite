@@ -43,7 +43,7 @@ The data in the database will disappear after API shutdown. In case if we need k
 
 ER-diagram:
 
-
+![ERD](doc/ER_diagram.png)
   
 
 #### API Endpoints Design
@@ -60,6 +60,9 @@ ER-diagram:
 - Delete: /api/campsite/{orderId}      -- Delete reservation
 
 For the detail, please refer to the openapi spec [here](src/main/resources/openapi.yaml)
+
+
+For detail work sequence, please refer [here](doc/workflow.md) 
 
 ### Local build
 
