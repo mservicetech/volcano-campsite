@@ -162,6 +162,9 @@ components:
         - email
         - name
       properties:
+        id:
+          type: integer
+          format: int64
         name:
           type: string
         email:
@@ -169,6 +172,8 @@ components:
     Reservation:
       type: object
       properties:
+        id:
+          type: string
         client:
           $ref: '#/components/schemas/Client'
         arrival:

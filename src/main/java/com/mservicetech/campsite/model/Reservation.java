@@ -11,9 +11,12 @@ import java.util.Objects;
 /**
  * Reservation
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-10-28T21:30:05.649560600-04:00[America/New_York]")
-public class Reservation  implements Serializable {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-10-29T18:10:26.593418400-04:00[America/New_York]")
+public class Reservation implements Serializable {
   private static final long serialVersionUID = 1L;
+
+  @JsonProperty("id")
+  private String id;
 
   @JsonProperty("client")
   private Client client;
@@ -25,6 +28,26 @@ public class Reservation  implements Serializable {
   @JsonProperty("departure")
   @org.springframework.format.annotation.DateTimeFormat(iso = org.springframework.format.annotation.DateTimeFormat.ISO.DATE)
   private LocalDate departure;
+
+  public Reservation id(String id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * Get id
+   * @return id
+  */
+  @ApiModelProperty(value = "")
+
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
 
   public Reservation client(Client client) {
     this.client = client;
@@ -99,14 +122,15 @@ public class Reservation  implements Serializable {
       return false;
     }
     Reservation reservation = (Reservation) o;
-    return Objects.equals(this.client, reservation.client) &&
+    return Objects.equals(this.id, reservation.id) &&
+        Objects.equals(this.client, reservation.client) &&
         Objects.equals(this.arrival, reservation.arrival) &&
         Objects.equals(this.departure, reservation.departure);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(client, arrival, departure);
+    return Objects.hash(id, client, arrival, departure);
   }
 
   @Override
@@ -114,6 +138,7 @@ public class Reservation  implements Serializable {
     StringBuilder sb = new StringBuilder();
     sb.append("class Reservation {\n");
     
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    client: ").append(toIndentedString(client)).append("\n");
     sb.append("    arrival: ").append(toIndentedString(arrival)).append("\n");
     sb.append("    departure: ").append(toIndentedString(departure)).append("\n");

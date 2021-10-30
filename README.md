@@ -5,6 +5,15 @@
 
 Please [click link](doc/requirement.md) for detail of business requirement
 
+### Prerequisites
+
+- JDK 11
+
+- Maven 3.8.1+
+
+- SpringBoot
+
+
 ### Endpoints
 
 - Get: /api/campsite 

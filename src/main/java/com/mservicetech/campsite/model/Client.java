@@ -3,22 +3,45 @@ package com.mservicetech.campsite.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Client
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-10-28T21:30:05.649560600-04:00[America/New_York]")
-public class Client  implements Serializable {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-10-29T15:49:37.116133600-04:00[America/New_York]")
+public class Client implements Serializable {
   private static final long serialVersionUID = 1L;
+
+  @JsonProperty("id")
+  private Long id;
 
   @JsonProperty("name")
   private String name;
 
   @JsonProperty("email")
   private String email;
+
+  public Client id(Long id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * Get id
+   * @return id
+  */
+  @ApiModelProperty(value = "")
+
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
 
   public Client name(String name) {
     this.name = name;
@@ -72,13 +95,14 @@ public class Client  implements Serializable {
       return false;
     }
     Client client = (Client) o;
-    return Objects.equals(this.name, client.name) &&
+    return Objects.equals(this.id, client.id) &&
+        Objects.equals(this.name, client.name) &&
         Objects.equals(this.email, client.email);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, email);
+    return Objects.hash(id, name, email);
   }
 
   @Override
@@ -86,6 +110,7 @@ public class Client  implements Serializable {
     StringBuilder sb = new StringBuilder();
     sb.append("class Client {\n");
     
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("}");

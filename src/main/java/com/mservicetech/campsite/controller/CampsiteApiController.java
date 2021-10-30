@@ -1,7 +1,6 @@
 package com.mservicetech.campsite.controller;
 
 import com.mservicetech.campsite.model.AvailableDates;
-
 import com.mservicetech.campsite.model.Reservation;
 import com.mservicetech.campsite.service.CampsiteService;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,7 @@ import java.util.Optional;
 public class CampsiteApiController implements CampsiteApi {
 
     private final NativeWebRequest request;
-    private CampsiteService campsiteService;
+    private final CampsiteService campsiteService;
 
     @org.springframework.beans.factory.annotation.Autowired
     public CampsiteApiController(NativeWebRequest request, CampsiteService campsiteService) {

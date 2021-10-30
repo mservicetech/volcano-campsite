@@ -16,3 +16,13 @@ spring:
 server:
   port: 8080
 
+query:
+  getReservedDates: SELECT reserved_date FROM reserved;
+  insertReservedDates: INSERT INTO reserved(reserved_date ) VALUES(?);
+  deleteReservedDates: DELETE FROM reserved WHERE reserved_date  = ?;
+  getClientByEmail: SELECT id, full_name, email FROM client WHERE email=?;
+  insertClient: INSERT INTO client(full_name, email ) VALUES(?, ?);
+  insertReservation: INSERT INTO reservation(id, client_Id, arrival_date, departure_date ) VALUES(?, ?, ?, ?);
+  getReservation: SELECT r.id as id, client_id, arrival_date, departure_date, full_name, email FROM reservation r JOIN client c ON c.id = r.client_id WHERE r.id = ? AND status = 'Active';
+  deleteReservation: UPDATE reservation SET status = 'Inactive' WHERE id = ?;
+  updateReservation: UPDATE reservation SET arrival_date= ? , departure_date= ? WHERE id = ?
