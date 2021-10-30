@@ -5,8 +5,9 @@
  */
 package com.mservicetech.campsite.controller;
 
-
 import com.mservicetech.campsite.model.AvailableDates;
+import com.mservicetech.campsite.model.Error;
+import java.time.LocalDate;
 import com.mservicetech.campsite.model.Reservation;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
@@ -15,12 +16,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.multipart.MultipartFile;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
+import javax.validation.constraints.*;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-10-29T09:15:01.057646300-04:00[America/New_York]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-10-30T14:02:37.322426800-04:00[America/New_York]")
 @Validated
 @Api(value = "campsite", description = "the campsite API")
 public interface CampsiteApi {
@@ -43,7 +47,7 @@ public interface CampsiteApi {
          }, tags={ "campsites", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Expected response to a valid request", response = Reservation.class),
-        @ApiResponse(code = 200, message = "unexpected error", response = Error.class) })
+        @ApiResponse(code = 200, message = "unexpected error", response = Error.class, responseContainer = "List") })
     @PostMapping(
         value = "/campsite",
         produces = { "application/json" },
@@ -53,7 +57,7 @@ public interface CampsiteApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"arrival\" : \"2021-01-30T00:00:00.000+0000\", \"client\" : { \"name\" : \"name\", \"email\" : \"email\" }, \"departure\" : \"2021-01-30T00:00:00.000+0000\" }";
+                    String exampleString = "{ \"arrival\" : \"2021-01-30T00:00:00.000+0000\", \"client\" : { \"name\" : \"name\", \"id\" : 0, \"email\" : \"email\" }, \"id\" : \"id\", \"departure\" : \"2021-01-30T00:00:00.000+0000\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -78,7 +82,7 @@ public interface CampsiteApi {
          }, tags={ "campsites", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Expected response to a valid request", response = Reservation.class),
-        @ApiResponse(code = 200, message = "unexpected error", response = Error.class) })
+        @ApiResponse(code = 200, message = "unexpected error", response = Error.class, responseContainer = "List") })
     @DeleteMapping(
         value = "/campsite/{orderId}",
         produces = { "application/json" }
@@ -87,7 +91,7 @@ public interface CampsiteApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"arrival\" : \"2021-01-30T00:00:00.000+0000\", \"client\" : { \"name\" : \"name\", \"email\" : \"email\" }, \"departure\" : \"2021-01-30T00:00:00.000+0000\" }";
+                    String exampleString = "{ \"arrival\" : \"2021-01-30T00:00:00.000+0000\", \"client\" : { \"name\" : \"name\", \"id\" : 0, \"email\" : \"email\" }, \"id\" : \"id\", \"departure\" : \"2021-01-30T00:00:00.000+0000\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -112,7 +116,7 @@ public interface CampsiteApi {
          }, tags={ "campsites", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "An paged array of pets", response = AvailableDates.class),
-        @ApiResponse(code = 200, message = "unexpected error", response = Error.class) })
+        @ApiResponse(code = 200, message = "unexpected error", response = Error.class, responseContainer = "List") })
     @GetMapping(
         value = "/campsite",
         produces = { "application/json" }
@@ -147,7 +151,7 @@ public interface CampsiteApi {
          }, tags={ "campsites", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "An paged array of pets", response = Reservation.class),
-        @ApiResponse(code = 200, message = "unexpected error", response = Error.class) })
+        @ApiResponse(code = 200, message = "unexpected error", response = Error.class, responseContainer = "List") })
     @PutMapping(
         value = "/campsite/{orderId}",
         produces = { "application/json" },
@@ -157,7 +161,7 @@ public interface CampsiteApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"arrival\" : \"2021-01-30T00:00:00.000+0000\", \"client\" : { \"name\" : \"name\", \"email\" : \"email\" }, \"departure\" : \"2021-01-30T00:00:00.000+0000\" }";
+                    String exampleString = "{ \"arrival\" : \"2021-01-30T00:00:00.000+0000\", \"client\" : { \"name\" : \"name\", \"id\" : 0, \"email\" : \"email\" }, \"id\" : \"id\", \"departure\" : \"2021-01-30T00:00:00.000+0000\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

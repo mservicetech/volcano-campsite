@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -26,5 +29,10 @@ public class CampsiteServiceImplTest {
         assertEquals(result, 30);
     }
 
+    @Test
+    public void test2()  {
+        long days = Duration.between(LocalDate.now().plusDays(4).atStartOfDay(), LocalDate.now().plusDays(1).atStartOfDay() ).toDays();
+        System.out.println(days);
 
+    }
 }

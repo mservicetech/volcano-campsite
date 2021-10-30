@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,6 +50,8 @@ public class JdbcCampsiteRepository implements CampsiteRepository{
     private String QUERY_DELETE_RESERVATION;
     @Value("${query.updateReservation}")
     private String QUERY_UPDATE_RESERVATION;
+    @Value("${query.verifyReservedDates}")
+    private String QUERY_VERIFY_RESERVED_DATE;
 
     @Override
     public List<LocalDate> findReserved() {
@@ -141,5 +144,16 @@ public class JdbcCampsiteRepository implements CampsiteRepository{
     @Override
     public int updateReservation(Reservation reservation) {
         return jdbcTemplate.update(QUERY_UPDATE_RESERVATION, Date.valueOf(reservation.getArrival()), Date.valueOf(reservation.getDeparture()), reservation.getId());
+    }
+
+    @Override
+    public List<LocalDate> verifyDates(List<LocalDate> dateList) {
+        String inSql = String.join(",", Collections.nCopies(dateList.size(), "?"));
+        String query = String.format(QUERY_VERIFY_RESERVED_DATE, inSql);
+        logger.debug("VerifyDates dynamic query:" + query);
+
+        List<LocalDate> bookedDates = jdbcTemplate.query(query,  dateList.toArray(),
+                (rs, rowNum) -> rs.getDate("reserved_date").toLocalDate());
+        return bookedDates;
     }
 }

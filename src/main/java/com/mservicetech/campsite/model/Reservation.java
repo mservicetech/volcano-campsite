@@ -1,18 +1,22 @@
 package com.mservicetech.campsite.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
-
-import javax.validation.Valid;
-import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.mservicetech.campsite.model.Client;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.time.LocalDate;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.io.Serializable;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 
 /**
  * Reservation
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-10-29T18:10:26.593418400-04:00[America/New_York]")
-public class Reservation implements Serializable {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-10-30T13:12:37.647192100-04:00[America/New_York]")
+public class Reservation  implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @JsonProperty("id")
@@ -79,7 +83,8 @@ public class Reservation implements Serializable {
    * Arrival date
    * @return arrival
   */
-  @ApiModelProperty(example = "Fri Jan 29 19:00:00 EST 2021", value = "Arrival date")
+  @ApiModelProperty(example = "Fri Jan 29 19:00:00 EST 2021", required = true, value = "Arrival date")
+  @NotNull
 
   @Valid
 
@@ -100,7 +105,8 @@ public class Reservation implements Serializable {
    * Leaving date
    * @return departure
   */
-  @ApiModelProperty(example = "Fri Jan 29 19:00:00 EST 2021", value = "Leaving date")
+  @ApiModelProperty(example = "Fri Jan 29 19:00:00 EST 2021", required = true, value = "Leaving date")
+  @NotNull
 
   @Valid
 
