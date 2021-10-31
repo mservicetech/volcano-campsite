@@ -1,20 +1,20 @@
-## volcano campsite microservice API test cases:
+## Volcano campsite microservice API test cases:
 
-For the test cases, we are using postman to send http requests
+For the test cases, postman is used to send http requests.
 
 
 
-### list campsite available
+### Provide campsite available list
 
 Endpoint: Get: /api/campsite
 
 Optional query parameters: startDate, endDate
 
-1. Request with specified startDate and endDate:
+1. Request with specified startDate and endDate
 
-url: http://localhost:8080/api/campsite?startDate=2021-10-31&endDate=2021-11-08
+Request url: http://localhost:8080/api/campsite?startDate=2021-10-31&endDate=2021-11-08
 
-Sample result
+Sample result:
 
 ```text
 {
@@ -33,13 +33,13 @@ Sample result
     "comment": null
 }
 ```
-2. Request with default searchcriteria. System will indicate the range from 1 day ahead of arrival and up to 1 month in advance
+2. Request with default search criteria. By default system will provide list between the range from 1 day ahead of arrival and up to 1 month in advance
 
-request url: http://localhost:8080/api/campsite
+Request url: http://localhost:8080/api/campsite
 
 3. If data range is larger than one month or start days is before current day, or endDate is before startDate:
 
-request URL: http://localhost:8080/api/campsite?startDate=2021-10-29&endDate=2021-12-08
+Request URL: http://localhost:8080/api/campsite?startDate=2021-10-29&endDate=2021-12-08
 
 Response error message:
 
@@ -52,9 +52,9 @@ Response error message:
 ]
 ```
 
-4. If input invalid query parameters:
+4. In case with invalid query parameters:
 
-request url:  http://localhost:8080/api/campsite?startDate=2021eeeee&endDate=2021-11-08
+Request url:  http://localhost:8080/api/campsite?startDate=2021eeeee&endDate=2021-11-08
 
 Response:
 
@@ -88,7 +88,7 @@ Request body:
 }
 ```
 
-response (return the confirmed reservation with reservation id)
+Response (return the confirmed reservation with reservation id)
 
 ```text
 {
@@ -139,7 +139,7 @@ Return 400 Bad Request error:
 }
 ```
 
-response:
+Response:
 
 ```text
 [

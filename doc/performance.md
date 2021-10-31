@@ -1,4 +1,4 @@
-## volcano campsite microservice API performance document
+## Volcano campsite microservice API performance document
 
 ### jmeter testing
 
@@ -12,12 +12,12 @@ Table result:
 
 
 
-### metrics with Prometheus
+### Metrics with Prometheus
 
 API metrics help to understand the operational performance of APIs. It can indicate digital business health and allow businesses to take immediate corrective action if an important app is down. It can help determine which new services are performing well and which aren’t.
 
 
-Prometheus is an open-source monitoring system that was originally built by SoundCloud. It consists of the following core components -
+Prometheus is an open-source monitoring system that was originally built by SoundCloud. It consists of the following core components:
 
 A data scraper that pulls metrics data over HTTP periodically at a configured interval.
 
@@ -38,7 +38,7 @@ Spring Boot  automatically configure a PrometheusMeterRegistry and a CollectorRe
 
 URL: http://localhost:8080/actuator/prometheus
 
-The link all download prometheus report:
+Below are the downloaded prometheus report:
 
 ```yaml
 jvm_gc_pause_seconds_count{action="end of minor GC",cause="Metadata GC Threshold"} 1.0
