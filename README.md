@@ -54,10 +54,12 @@ ER-diagram:
 - POST: /api/campsite                  --campsite reservation
 
 
-- Put:  /api/campsite/{orderId}        -- Change reservation
+- Put:  /api/campsite/{orderId}        -- Change reservation by Id and new reservation info
 
 
-- Delete: /api/campsite/{orderId}      -- Delete reservation
+- Delete: /api/campsite/{orderId}      -- Delete reservation by Id
+
+- Get: /api/campsite/{orderId}      -- Get reservation by Id
 
 For the detail, please refer to the openapi spec [here](src/main/resources/openapi.yaml).
 

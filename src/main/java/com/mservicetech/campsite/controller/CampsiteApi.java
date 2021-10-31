@@ -24,7 +24,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-10-30T14:02:37.322426800-04:00[America/New_York]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-10-31T19:42:54.357957500-04:00[America/New_York]")
 @Validated
 @Api(value = "campsite", description = "the campsite API")
 public interface CampsiteApi {
@@ -88,6 +88,39 @@ public interface CampsiteApi {
         produces = { "application/json" }
     )
     default ResponseEntity<Reservation> deleteOrder(@ApiParam(value = "The id of the resevation for the campsite",required=true) @PathVariable("orderId") String orderId) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"arrival\" : \"2021-01-30T00:00:00.000+0000\", \"client\" : { \"name\" : \"name\", \"id\" : 0, \"email\" : \"email\" }, \"id\" : \"id\", \"departure\" : \"2021-01-30T00:00:00.000+0000\" }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /campsite/{orderId} : get a campsite oder
+     *
+     * @param orderId The id of the resevation for the campsite (required)
+     * @return Expected response to a valid request (status code 200)
+     *         or unexpected error (status code 200)
+     */
+    @ApiOperation(value = "get a campsite oder", nickname = "getOrder", notes = "", response = Reservation.class, authorizations = {
+        @Authorization(value = "campsite_auth", scopes = {
+            @AuthorizationScope(scope = "read:campsite", description = "get campsite") })
+         }, tags={ "campsites", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Expected response to a valid request", response = Reservation.class),
+        @ApiResponse(code = 200, message = "unexpected error", response = Error.class, responseContainer = "List") })
+    @GetMapping(
+        value = "/campsite/{orderId}",
+        produces = { "application/json" }
+    )
+    default ResponseEntity<Reservation> getOrder(@ApiParam(value = "The id of the resevation for the campsite",required=true) @PathVariable("orderId") String orderId) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
