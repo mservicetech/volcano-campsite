@@ -5,6 +5,8 @@ import com.mservicetech.campsite.model.AvailableDates;
 import com.mservicetech.campsite.model.Error;
 import com.mservicetech.campsite.model.Reservation;
 import com.mservicetech.campsite.service.CampsiteService;
+import com.mservicetech.campsite.validation.BaseValidator;
+import com.mservicetech.campsite.validation.ValidationResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,25 +16,26 @@ import org.springframework.web.context.request.NativeWebRequest;
 import javax.validation.constraints.DecimalMax;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Stream;
 
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-10-28T21:30:05.649560600-04:00[America/New_York]")
 @Controller
 @RequestMapping("${openapi.swaggerVolcanoCampsite.base-path:/api}")
 public class CampsiteApiController implements CampsiteApi {
 
-    private final  String INVALID_DATE_RANGE = "ERR20001";
-    private final  String INVALID_DATE_INPUT = "ERR20002";
-    private final  String OVER_LIMIT = "ERR20002";
     private final NativeWebRequest request;
     private final CampsiteService campsiteService;
+    private final  String SEARCH = "SEARCH";
+    public  final String RESERVATION = "RESERVATION";
+
+    private List<BaseValidator> validators;
 
     @org.springframework.beans.factory.annotation.Autowired
-    public CampsiteApiController(NativeWebRequest request, CampsiteService campsiteService) {
+    public CampsiteApiController(NativeWebRequest request, CampsiteService campsiteService, List<BaseValidator> validators) {
         this.request = request;
         this.campsiteService = campsiteService;
+        this.validators = validators;
     }
 
     @Override
@@ -44,7 +47,15 @@ public class CampsiteApiController implements CampsiteApi {
     public ResponseEntity<AvailableDates> listCampsite(LocalDate startDate, LocalDate endDate) {
         if (startDate==null) startDate = LocalDate.now().plusDays(1);
         if (endDate==null) endDate = LocalDate.now().plusDays(30);
-        List<Error> errors  = validateSearchCritiria(startDate, endDate);
+
+        Map<String, LocalDate> searchCriteria = new HashMap<>();
+        searchCriteria.put("startDate", startDate);
+        searchCriteria.put("endDate", endDate);
+        List<Error> errors = new ArrayList<>();
+        Stream<ValidationResult> validationResultStream = validators.stream().filter(validator->validator.support(SEARCH)).flatMap(v->v.validate(null,searchCriteria));
+
+        validationResultStream.filter(v->v.isError()).forEach(v->errors.addAll(v.getErrorCodes()));
+
         if (errors.size()>0) {
             throw new BusinessValidationException(errors, "Business Validation error.");
         }
@@ -54,7 +65,10 @@ public class CampsiteApiController implements CampsiteApi {
 
     @Override
     public ResponseEntity<Reservation> createOrder(Reservation reservation) {
-        List<Error> errors  = validateReservation(reservation);
+        List<Error> errors = new ArrayList<>();
+        Stream<ValidationResult> validationResultStream = validators.stream().filter(validator->validator.support(RESERVATION)).flatMap(v->v.validate(null,reservation));
+        validationResultStream.filter(v->v.isError()).forEach(v->errors.addAll(v.getErrorCodes()));
+
         if (errors.size()>0) {
             throw new BusinessValidationException(errors, "Business Validation error.");
         }
@@ -71,7 +85,10 @@ public class CampsiteApiController implements CampsiteApi {
 
     @Override
     public ResponseEntity<Reservation> updateCampsiteOrder(String orderId, Reservation reservation) {
-        List<Error> errors  = validateReservation(reservation);
+        List<Error> errors = new ArrayList<>();
+        Stream<ValidationResult> validationResultStream = validators.stream().filter(validator->validator.support(RESERVATION)).flatMap(v->v.validate(null,reservation));
+        validationResultStream.filter(v->v.isError()).forEach(v->errors.addAll(v.getErrorCodes()));
+
         if (errors.size()>0) {
             throw new BusinessValidationException(errors, "Business Validation error.");
         }
@@ -79,25 +96,4 @@ public class CampsiteApiController implements CampsiteApi {
                 .body(campsiteService.updateReservation(orderId, reservation));
     }
 
-    private List<Error>  validateReservation(Reservation reservation)  {
-        List<Error> errors = new ArrayList<>();
-        if (reservation.getArrival().isBefore(LocalDate.now().plusDays(1)) || reservation.getDeparture().isAfter(LocalDate.now().plusDays(30))) {
-            errors.add(new Error().code(INVALID_DATE_RANGE).message( "Invalid date range. Campsite only available from tomorrow to 30 days in advance."));
-        }
-        if (reservation.getDeparture().isBefore(reservation.getArrival())) {
-            errors.add(new Error().code(INVALID_DATE_INPUT).message( "Invalid date input. Please verify again."));
-        }
-        if (Duration.between(reservation.getArrival().atStartOfDay(), reservation.getDeparture().atStartOfDay() ).toDays()>3) {
-            errors.add(new Error().code(OVER_LIMIT).message( "The campsite can be reserved for max 3 days "));
-        }
-        return errors;
-    }
-
-    private List<Error>  validateSearchCritiria(LocalDate startDate, LocalDate endDate)  {
-        List<Error> errors = new ArrayList<>();
-        if (startDate.isBefore(LocalDate.now().plusDays(1)) || endDate.isAfter(LocalDate.now().plusDays(31)) || endDate.isBefore(startDate)) {
-            errors.add(new Error().code(INVALID_DATE_RANGE).message( "Invalid date range. Campsite only available from tomorrow to 30 days in advance."));
-        }
-        return errors;
-    }
 }
