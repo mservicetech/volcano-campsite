@@ -86,7 +86,7 @@ docker-compose -f   docker-compose-prometheus.yml up
 ```
 The docker-compose will start three docker images:
 
-- campsite service will start on port 8089
+- campsite service will start on port 8080
 
 - Prometheus will start on 9090 port:
   
