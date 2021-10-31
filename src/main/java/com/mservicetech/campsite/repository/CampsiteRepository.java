@@ -6,6 +6,13 @@ import com.mservicetech.campsite.model.Reservation;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Define data repository  interface methods
+ * <p>
+ * Supports volcano campsite reservation information to persist to backend repository
+ *
+ * @author Gavin Chen
+ */
 public interface CampsiteRepository {
 
     List<LocalDate> findReserved();

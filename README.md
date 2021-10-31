@@ -108,3 +108,16 @@ We can use jmeter to verify the API performance.
 From jmeter, open the jmeter file: ./jmeter/campsite-get.jmx. The test plan set 10 concurrent threads to access the GET campsite endpoint (http://localhost:8080/api/campsite?startDate=2021-11-10&endDate=2021-11-18)
 
 For detail of performance result, please refer [performance](doc/performance.md) document
+
+---
+### Appendix
+
+#### Error Codes:
+
+- ERR10000      System error code, http code 500
+- ERR10001      Backend Data process error, http code 500
+- ERR10002      Data not found error,  http code 400
+
+- ERR20001      Invalid  data range from input,  http code 422
+- ERR20002      Invalid  data input,  http code 422
+- ERR20003      Data over limit error,  http code 422
