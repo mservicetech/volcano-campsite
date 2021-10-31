@@ -84,8 +84,19 @@ From API root folder start Prometheus docker-compose:
 ```yaml
 docker-compose -f   docker-compose-prometheus.yml up
 ```
+The docker-compose will start three docker images:
 
-Prometheus will start on 9090 port:
+- campsite service will start on port 8089
 
-http://localhost:9090/
+- Prometheus will start on 9090 port:
+  
+  http://localhost:9090/
+
+- grafana start on 3000 port
+
+We can start to run jmeter test and monitor the API by prometheus metrics.
+
+For Example: CPU usage:
+
+![cpu](cpu.png)
 
