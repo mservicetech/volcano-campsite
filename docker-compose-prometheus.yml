@@ -2,6 +2,14 @@ version: '2'
 
 services:
 
+  campsite-service:
+    build: ./
+    ports:
+      - 8080:8080
+    networks:
+      - localnet
+
+
   prometheus:
     build: ./prometheus/
     networks:
