@@ -4,7 +4,7 @@ volcano-campsite API is the microservice restful API for volcano campsite reserv
 
 ### Requirement
 
-Please [click link](doc/requirement.md) for detail of business requirement
+Please [click link](doc/requirement.md) for detail of business requirement.
 
 ### Prerequisites
 
@@ -18,17 +18,17 @@ Please [click link](doc/requirement.md) for detail of business requirement
 
 #### Backend repository Design
 
-The volcano-campsite API use H2 database as backend repository to save user and reservation information. Since we only design the API to handler one single campsite, the database structure is simple:
+The volcano-campsite API uses H2 database as backend repository to save user and reservation information. As the API is designed to handle one single campsite, the database structure is simple:
 
 
-| table   | comments        |
+| Table   | Comments        |
 | --------|---------------|
-| client  | client information, include client name and client email |
-| reservation  | reservation detail information. This is the table hold book of records for reservation |
-| reserved  | reserved date; This table used to  handle concurrent requests  |
+| client  | Client information including client name and client email |
+| reservation  | Reservation detail information. This is the table hold book of records for reservation |
+| reserved  | Reserved date. This table is used to handle concurrent requests  |
   
 
-By default, when the API start, h2 will start in-memory database testdb and create tables above
+By default, when the API starts, h2 will start in-memory database testdb and create tables listed above.
 
 ```yaml
   datasource:
@@ -59,10 +59,10 @@ ER-diagram:
 
 - Delete: /api/campsite/{orderId}      -- Delete reservation
 
-For the detail, please refer to the openapi spec [here](src/main/resources/openapi.yaml)
+For the detail, please refer to the openapi spec [here](src/main/resources/openapi.yaml).
 
 
-For detail work sequence, please refer [here](doc/workflow.md) 
+For detail work sequence, please refer [here](doc/workflow.md) .
 
 ### Local build
 
@@ -92,22 +92,22 @@ docker run -p 8080:8080 volcano/campsite
 Swagger ui:  http://localhost:8080/swagger-ui.html
 
 API health check:   http://localhost:8080/actuator/health
-
-We can use postman to send https request to test the API:
+ 
+Postman could be used to send https request to test the API:
 
 ![postman](doc/test.png)
 
 
-For detail test cases, please refer the [test cases](doc/test_cases.md) document
+For detailed test cases, please refer the [test cases](doc/test_cases.md) document.
 
 ### Performance 
 
 
-We can use jmeter to verify the API performance. 
+Jmeter could be used to verify the API performance. 
 
-From jmeter, open the jmeter file: ./jmeter/campsite-get.jmx. The test plan set 10 concurrent threads to access the GET campsite endpoint (http://localhost:8080/api/campsite?startDate=2021-11-10&endDate=2021-11-18)
+From jmeter, open the jmeter file: ./jmeter/campsite-get.jmx. The test plan set 10 concurrent threads to access the GET campsite endpoint (http://localhost:8080/api/campsite?startDate=2021-11-10&endDate=2021-11-18).
 
-For detail of performance result, please refer [performance](doc/performance.md) document
+For performance result detail, please refer to [performance](doc/performance.md) document.
 
 ---
 ### Appendix
