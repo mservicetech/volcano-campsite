@@ -24,7 +24,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: prometheus,info,metrics,threaddump
+        include: "*"
 
 
 query:
