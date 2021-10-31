@@ -25,7 +25,7 @@ A time-series database to store all the metrics data.
 
 A simple user interface where you can visualize, query, and monitor all the metrics.
 
-In the volcano campsite, it enabled spring boot micrometer-registry-prometheus dependency:
+- In the volcano campsite, it enabled spring boot micrometer-registry-prometheus dependency:
 
 ```yaml
 <dependency>
@@ -76,3 +76,16 @@ jvm_memory_committed_bytes{area="heap",id="G1 Eden Space"} 2.36978176E8
 jvm_memory_committed_bytes{area="nonheap",id="Compressed Class Space"} 9822208.0
 jvm_memory_committed_bytes{area="nonheap",id="CodeHeap 'non-profiled nmethods'"} 4587520.0
 ```
+
+-  Setting up Prometheus and importing the metric:
+
+From API root folder start Prometheus docker-compose:
+
+```yaml
+docker-compose -f   docker-compose-prometheus.yml up
+```
+
+Prometheus will start on 9090 port:
+
+http://localhost:9090/
+

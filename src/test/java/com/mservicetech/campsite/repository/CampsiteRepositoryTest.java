@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Disabled
+
 @SpringBootTest
 @ActiveProfiles("test")
 public class CampsiteRepositoryTest {
