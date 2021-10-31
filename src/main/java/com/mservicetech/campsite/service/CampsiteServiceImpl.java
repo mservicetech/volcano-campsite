@@ -143,6 +143,16 @@ public class CampsiteServiceImpl implements CampsiteService{
         return reservation;
     }
 
+    @Override
+    public Reservation getReservation(String reservationId) {
+        try {
+           return campsiteRepository.getReservation(reservationId);
+        } catch (Exception e) {
+            logger.error("Error on the reservation:" + e);
+            throw new DataNotFoundException("Cannot found reservation, input reservation id is not existing.");
+        }
+    }
+
     private String reservedDates(List<LocalDate> dateList) {
         return dateList.stream()
                 .map(n -> String.valueOf(n))

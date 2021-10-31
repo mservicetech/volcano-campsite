@@ -70,6 +70,12 @@ public class CampsiteApiController implements CampsiteApi {
     }
 
     @Override
+    public ResponseEntity<Reservation> getOrder(String orderId) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(campsiteService.getReservation(orderId));
+    }
+
+    @Override
     public ResponseEntity<Reservation> updateCampsiteOrder(String orderId, Reservation reservation) {
         List<Error> errors  = validateReservation(reservation);
         if (errors.size()>0) {

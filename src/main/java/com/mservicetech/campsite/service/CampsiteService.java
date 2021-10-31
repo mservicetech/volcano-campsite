@@ -48,4 +48,12 @@ public interface CampsiteService {
 	 * @param reservationId reservation id which need be canceled .
 	 */
 	Reservation deleteReservation(String reservationId) ;
+
+	/**
+	 * get Reservation by reservationId
+	 * Get the reservation base on the provide id  from database.
+	 *
+	 * @param reservationId reservation id which need be canceled .
+	 */
+	Reservation getReservation(String reservationId) ;
 }
