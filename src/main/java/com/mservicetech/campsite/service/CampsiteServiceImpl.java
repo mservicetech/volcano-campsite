@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 @Service
 public class CampsiteServiceImpl implements CampsiteService{
@@ -31,9 +32,7 @@ public class CampsiteServiceImpl implements CampsiteService{
         AvailableDates availableDates = new AvailableDates();
         List<LocalDate> result = new ArrayList<>();
         long days = Duration.between(startDate.atStartOfDay(), endDate.atStartOfDay() ).toDays();
-        for (int i=1; i<=days; i++) {
-            result.add(startDate.plusDays(i));
-        }
+        LongStream.range(0, days).forEach(l-> result.add(startDate.plusDays(l)));
         List<LocalDate> reservedDates = campsiteRepository.findReserved();
         result.removeAll(reservedDates);
         availableDates.setDatelist(result);
@@ -47,9 +46,8 @@ public class CampsiteServiceImpl implements CampsiteService{
     public Reservation createReservation(Reservation reservation) {
         List<LocalDate> dateList = new ArrayList<>();
         long days = Duration.between(reservation.getArrival().atStartOfDay(), reservation.getDeparture().atStartOfDay() ).toDays();
-        for (int i=0; i<=days; i++) {
-            dateList.add(reservation.getArrival().plusDays(i));
-        }
+        LongStream.range(0, days).forEach(l-> dateList.add(reservation.getArrival().plusDays(l)));
+
         List<LocalDate> bookedList =  campsiteRepository.verifyDates(dateList);
         if (bookedList.size()==0) {
             List<Client> clients = campsiteRepository.checkClientExisting(reservation.getClient());
@@ -93,16 +91,14 @@ public class CampsiteServiceImpl implements CampsiteService{
         if (oldReservation!=null && reservationMarch(reservation, oldReservation)) {
             List<LocalDate> dateList = new ArrayList<>();
             long days = Duration.between(oldReservation.getArrival().atStartOfDay(), oldReservation.getDeparture().atStartOfDay() ).toDays();
-            for (int i=0; i<=days; i++) {
-                dateList.add(reservation.getArrival().plusDays(i));
-            }
+            LongStream.range(0, days).forEach(l-> dateList.add(reservation.getArrival().plusDays(l)));
+
             campsiteRepository.deleteDates(dateList);
 
             dateList.clear();
             days = Duration.between(reservation.getArrival().atStartOfDay(), reservation.getDeparture().atStartOfDay() ).toDays();
-            for (int i=0; i<=days; i++) {
-                dateList.add(reservation.getArrival().plusDays(i));
-            }
+            LongStream.range(0, days).forEach(l-> dateList.add(reservation.getArrival().plusDays(l)));
+
             List<LocalDate> bookedList =  campsiteRepository.verifyDates(dateList);
             if (bookedList.size()==0) {
                 reservation.setId(reservationId);
@@ -134,9 +130,7 @@ public class CampsiteServiceImpl implements CampsiteService{
         if (reservation!=null) {
             List<LocalDate> dateList = new ArrayList<>();
             long days = Duration.between(reservation.getArrival().atStartOfDay(), reservation.getDeparture().atStartOfDay() ).toDays();
-            for (int i=0; i<=days; i++) {
-                dateList.add(reservation.getArrival().plusDays(i));
-            }
+            LongStream.range(0, days).forEach(l-> dateList.add(reservation.getArrival().plusDays(l)));
             campsiteRepository.deleteDates(dateList);
             campsiteRepository.deleteReservation(reservationId);
         }
